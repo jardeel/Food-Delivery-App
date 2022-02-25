@@ -223,6 +223,41 @@ const Home = () => {
     )
   }
 
+  function renderDeliveryTo() {
+    return (
+      <View
+        style={{
+          marginTop: SIZES.padding,
+          marginHorizontal: SIZES.padding
+        }}
+      >
+        <Text style={{color: COLORS.primary, ...FONTS.body3}}>
+          DELIVERY TO
+        </Text>
+
+        <TouchableOpacity
+          style={{
+            flexDirection: 'row',
+            marginTop: SIZES.base,
+            alignItems: 'center'
+          }}
+        >
+          <Text style={{...FONTS.h3}}>
+            {dummyData?.myProfile?.address}
+          </Text>
+          <Image
+            source={icons.down_arrow}
+            style={{
+              marginLeft: SIZES.base,
+              height: 20,
+              width: 20
+            }}
+          />
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
   return (
     <View style={{ flex: 1}}>
       {/* Search */}
@@ -235,6 +270,9 @@ const Home = () => {
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={
           <View>
+            {/* Delivery To */}
+            {renderDeliveryTo()}
+
             {/* Food Categories */}
             {renderFoodCategories()}
 
@@ -267,6 +305,9 @@ const Home = () => {
             />
           )
         }}
+        ListFooterComponent={
+          <View style={{ height: 200}}/>
+        }
       />
     </View>
   )

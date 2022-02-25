@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import Search from './components/Search';
-import { HorizontalFoodCard } from '../../components';
+import { HorizontalFoodCard, VerticalFoodCard } from '../../components';
 
 import { FONTS, SIZES, COLORS, icons, dummyData } from '../../constants';
 
@@ -67,6 +67,9 @@ const Home = () => {
 
     //Find the menu based on the menuTypeId
     let selectedMenu = dummyData.menu.find(a => a.id == menuTypeId)
+
+    //Set the popular menu based on the categoryId
+    setPopular(selectedPopular?.list.filter(a => a.categories.includes(categoryId)))
 
     //Set the recommended menu based on the categoryId
     setRecommends(selectedRecommend?.list.filter(a => a.categories.includes(categoryId)))
@@ -154,6 +157,22 @@ const Home = () => {
         title="Popular Near You"
         onPress={() => console.log("Show all popular items")}
       >
+        <FlatList
+          data={popular}
+          keyExtractor={item => `${item.id}`}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item, index }) => (
+            <VerticalFoodCard
+              containerStyle={{
+                marginLeft: index == 0 ? SIZES.padding : 18,
+                marginRight: index == popular.length - 1 ? SIZES.padding : 0
+              }}
+              item={item}
+              onPress={() => console.log("Vertiacal Food Card")}
+            />
+          )}
+        />
 
       </Section>
     )

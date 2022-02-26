@@ -8,7 +8,7 @@ import {
   Modal
 } from 'react-native';
 
-import { IconButton, TwoPointSlider, TextButton } from '../../components';
+import { IconButton, TwoPointSlider, TextButton, TextIconButton } from '../../components';
 import {COLORS, SIZES, FONTS, constants, icons} from '../../constants';
 
 const Section = ({ containerStyle, title, children }) => {
@@ -82,7 +82,8 @@ const FilterModal = ({ isVisible, onClose }) => {
         <View
           style={{
             flexDirection: 'row',
-            flexWrap: 'wrap'
+            flexWrap: 'wrap',
+            marginTop: SIZES.radius
           }}
         >
           {constants.delivery_time.map((item, index) => {
@@ -103,6 +104,64 @@ const FilterModal = ({ isVisible, onClose }) => {
                   backgroundColor: item.id == deliveryTime ? COLORS.primary : COLORS.lightGray2
                 }}
                 onPress={() => setDeliveryTime(item.id)}
+              />
+            )
+          })}
+        </View>
+      </Section>
+    )
+  }
+
+  function renderPricingRange() {
+    return(
+      <Section title="Pricing Range">
+        <View style={{ alignItems: 'center' }}>
+          <TwoPointSlider
+            values={[10, 50]}
+            min={1}
+            max={100}
+            prefix="$"
+            postfix=""
+            onValuesChange={(values) => console.log(values)}
+          />
+        </View>
+      </Section>
+    )
+  }
+
+  function renderRatings() {
+    return (
+      <Section
+        title="Ratings"
+        containerStyle={{ marginTop: 40}}
+      >
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between'
+          }}
+        >
+          {constants.ratings.map((item, index) => {
+            return (
+              <TextIconButton
+                key={`Ratings-${index}`}
+                containerStyle={{
+                  flex: 1,
+                  height: 50,
+                  margin: 5,
+                  alignItems: 'center',
+                  borderRadius: SIZES.base,
+                  backgroundColor: item.id == ratings ? COLORS.primary : COLORS.lightGray2
+                }}
+                label={item.label}
+                labelStyle={{
+                  color: item.id == ratings ? COLORS.white : COLORS.gray
+                }}
+                icon={icons.star}
+                iconStyle={{
+                  tintColor: item.id == ratings ? COLORS.white : COLORS.gray
+                }}
+                onPress={() => setRatings(item.id)}
               />
             )
           })}
@@ -175,6 +234,11 @@ const FilterModal = ({ isVisible, onClose }) => {
             {/* Delivery Time */}
             {renderDeliveryTime()}
 
+            {/* Pricing Range */}
+            {renderPricingRange()}
+
+            {/* Ratings */}
+            {renderRatings()}
           </ScrollView>
         </Animated.View>
       </View>

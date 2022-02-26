@@ -8,7 +8,7 @@ import {
   Modal
 } from 'react-native';
 
-import { IconButton, TwoPointSlider } from '../../components';
+import { IconButton, TwoPointSlider, TextButton } from '../../components';
 import {COLORS, SIZES, FONTS, constants, icons} from '../../constants';
 
 const Section = ({ containerStyle, title, children }) => {
@@ -30,6 +30,9 @@ const FilterModal = ({ isVisible, onClose }) => {
   const modalAnimatedValue = useRef(new Animated.Value(0)).current
 
   const [showFilterModal, setShowFilterModal] = useState(isVisible);
+  const [deliveryTime, setDeliveryTime] = useState("");
+  const [ratings, setRatings] = useState("");
+  const [tags, setTags] = useState("");
 
   useEffect(() => {
     if(showFilterModal){
@@ -63,6 +66,46 @@ const FilterModal = ({ isVisible, onClose }) => {
             postfix="km"
             onValuesChange={(values) => console.log(values)}
           />
+        </View>
+      </Section>
+    )
+  }
+
+  function renderDeliveryTime() {
+    return (
+      <Section
+        title="Delivery Time"
+        containerStyle={{
+          marginTop: 40
+        }}
+      >
+        <View
+          style={{
+            flexDirection: 'row',
+            flexWrap: 'wrap'
+          }}
+        >
+          {constants.delivery_time.map((item, index) => {
+            return (
+              <TextButton
+                key={`delivery_time-${index}`}
+                label={item.label}
+                labelStyle={{
+                  color: item.id == deliveryTime ? COLORS.white : COLORS.gray,
+                  ...FONTS.body3
+                }}
+                buttonContainerStyle={{
+                  width: "30%",
+                  height: 50,
+                  margin: 5,
+                  alignItems: 'center',
+                  borderRadius: SIZES.base,
+                  backgroundColor: item.id == deliveryTime ? COLORS.primary : COLORS.lightGray2
+                }}
+                onPress={() => setDeliveryTime(item.id)}
+              />
+            )
+          })}
         </View>
       </Section>
     )
@@ -128,6 +171,9 @@ const FilterModal = ({ isVisible, onClose }) => {
           >
             {/* Distance */}
             {renderDistance()}
+
+            {/* Delivery Time */}
+            {renderDeliveryTime()}
 
           </ScrollView>
         </Animated.View>

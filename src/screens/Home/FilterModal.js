@@ -8,8 +8,23 @@ import {
   Modal
 } from 'react-native';
 
-import { IconButton } from '../../components';
+import { IconButton, TwoPointSlider } from '../../components';
 import {COLORS, SIZES, FONTS, constants, icons} from '../../constants';
+
+const Section = ({ containerStyle, title, children }) => {
+  return (
+    <View
+      style={{
+        marginTop: SIZES.padding,
+        ...containerStyle
+      }}
+    >
+      <Text style={{ ...FONTS.h3 }}>{title}</Text>
+
+      {children}
+    </View>
+  )
+}
 
 const FilterModal = ({ isVisible, onClose }) => {
   const modalAnimatedValue = useRef(new Animated.Value(0)).current
@@ -17,7 +32,7 @@ const FilterModal = ({ isVisible, onClose }) => {
   const [showFilterModal, setShowFilterModal] = useState(isVisible);
 
   useEffect(() => {
-    if(!showFilterModal){
+    if(showFilterModal){
       Animated.timing(modalAnimatedValue, {
         toValue: 1,
         duration: 500,
@@ -36,6 +51,22 @@ const FilterModal = ({ isVisible, onClose }) => {
     inputRange: [0, 1],
     outputRange: [SIZES.height, SIZES.height - 680]
   })
+
+  function renderDistance() {
+    return(
+      <Section title="Distance">
+        <View style={{alignItems: 'center'}}>
+          <TwoPointSlider
+            values={[3, 10]}
+            min={1}
+            max={20}
+            postfix="km"
+            onValuesChange={(values) => console.log(values)}
+          />
+        </View>
+      </Section>
+    )
+  }
 
   return(
     <Modal
@@ -90,6 +121,15 @@ const FilterModal = ({ isVisible, onClose }) => {
               onPress={() => setShowFilterModal(false)}
             />
           </View>
+
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: 250 }}
+          >
+            {/* Distance */}
+            {renderDistance()}
+
+          </ScrollView>
         </Animated.View>
       </View>
     </Modal>

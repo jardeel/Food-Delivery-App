@@ -1,10 +1,16 @@
-import React from 'react';
-import {View, Text, Image, ImageBackground, Animated} from 'react-native';
-import {constants, images, FONTS, SIZES, COLORS} from '../../constants';
+import React, { useRef, useState } from 'react';
+import { View, Text, Image, ImageBackground, Animated } from 'react-native';
+import { constants, images, FONTS, SIZES, COLORS } from '../../constants';
+import { TextButton } from '../../components';
 
-const Onboarding = () => {
+const Onboarding = ({navigation}) => {
+  const scrollX = useRef(new Animated.Value(0)).current;
+  const flatListRef = useRef();
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const scrollX = new Animated.Value(0);
+  const onViewChangeRef = useRef(({ viewableItems, changed }) => {
+    setCurrentIndex(viewableItems[0].index)
+  })
 
   const Dots = () => {
     const dotPosition = Animated.divide(scrollX, SIZES.width)
@@ -79,7 +85,62 @@ const Onboarding = () => {
         <View style={{ flex: 1, justifyContent: 'center'}}>
           <Dots />
         </View>
+
         {/* Buttons */}
+        {currentIndex < constants.onboarding_screens.length - 1 &&
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingHorizontal: SIZES.padding,
+              marginVertical: SIZES.padding
+            }}
+          >
+            <TextButton
+              label="Skip"
+              buttonContainerStyle={{
+                backgroundColor: null
+              }}
+              labelStyle={{
+                color: COLORS.darkGray2
+              }}
+              onPress={() => navigation.replace("SignIn")}
+            />
+
+            <TextButton
+              label="Next"
+              buttonContainerStyle={{
+                height: 60,
+                width: 200,
+                borderRadius: SIZES.radius
+              }}
+              onPress={() => {
+                flatListRef?.current?.scrollToIndex({
+                  index: currentIndex + 1,
+                  animated: true
+                })
+              }}
+            />
+          </View>
+        }
+
+        {currentIndex == constants.onboarding_screens.length - 1 &&
+          <View
+            style={{
+              paddingHorizontal: SIZES.padding,
+              marginVertical: SIZES.padding
+            }}
+          >
+            <TextButton
+              label="Let's Get Started"
+              buttonContainerStyle={{
+                height: 60,
+                borderRadius: SIZES.radius
+              }}
+              onPress={() => navigation.replace("SignIn")}
+            />
+          </View>
+        }
       </View>
     )
   }
@@ -89,6 +150,7 @@ const Onboarding = () => {
       {renderHeaderLogo()}
 
       <Animated.FlatList
+        ref={flatListRef}
         horizontal
         pagingEnabled
         data={constants.onboarding_screens}
@@ -101,6 +163,7 @@ const Onboarding = () => {
           ],
           { useNativeDriver: false }
         )}
+        onViewableItemsChanged={onViewChangeRef.current}
         keyExtractor={(item) => `${item.id}`}
         renderItem={({ item, index}) => {
           return (

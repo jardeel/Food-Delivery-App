@@ -53,14 +53,14 @@ const App = () => {
     Poppins_900Black,
   });
 
-  if(!fontsLoaded){
-    return <AppLoading />
-  }
-
-
-
   useEffect(() => {
-    SplashScreen.hideAsync();
+    async function loadFonts(){
+      if(!fontsLoaded){
+        return <AppLoading />
+      }
+      SplashScreen.hideAsync();
+    }
+    loadFonts()
   },[])
 
 

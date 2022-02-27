@@ -1,4 +1,11 @@
 import MainLayout from "./MainLayout"
+import Onboarding from "./OnBoarding/onBoarding"
+
+//Authentication
+import SignIn from "./Authentication/SignIn"
+import SignUp from "./Authentication/SignUp"
+import Otp from "./Authentication/Otp"
+import ForgotPassword from "./Authentication/ForgotPassword"
 
 // Home
 import Home from "./Home/Home"
@@ -17,11 +24,16 @@ import Favourite from "./Favourite/Favourite";
 import Notification from "./Notification/Notification"
 
 export {
-    MainLayout,
-    Home,
-    FilterModal,
-    Search,
-    CartTab,
-    Favourite,
-    Notification
+  MainLayout,
+  Onboarding,
+  Home,
+  FilterModal,
+  Search,
+  CartTab,
+  Favourite,
+  Notification,
+  SignIn,
+  SignUp,
+  Otp,
+  ForgotPassword
 }

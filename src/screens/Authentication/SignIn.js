@@ -14,6 +14,10 @@ const SignIn = ({ navigation }) => {
   const [showPass, setShowPass] = useState(false);
   const [saveMe, setSaveMe] = useState(false);
 
+  function isEnableSignIn() {
+    return email != "" && password != "" && emailError == ""
+  }
+
   return(
     <AuthLayout
       title="Let's Sign You In"
@@ -107,8 +111,48 @@ const SignIn = ({ navigation }) => {
         </View>
 
         {/* Sign In */}
+        <TextButton
+          label="Sign In"
+          dispatch={isEnableSignIn() ? false : true }
+          buttonContainerStyle={{
+            height: 55,
+            alignItems: 'center',
+            marginTop: SIZES.padding,
+            borderRadius: SIZES.padding,
+            backgroundColor: isEnableSignIn() ?
+              COLORS.primary : COLORS.transparentPrimary
+          }}
+        />
 
         {/* Sign Up */}
+        <View
+          style={{
+            flexDirection: 'row',
+            marginTop: SIZES.radius,
+            justifyContent: 'center'
+          }}
+        >
+          <Text
+            style={{
+              color: COLORS.darkGray,
+              ...FONTS.body3
+            }}
+          >
+            Don't have an account?
+          </Text>
+          <TextButton
+            label="Sign Up"
+            buttonContainerStyle={{
+              marginLeft: 3,
+              backgroundColor: null
+            }}
+            labelStyle={{
+              color: COLORS.primary,
+              ...FONTS.h3
+            }}
+            onPress={() => navigation.navigate("SignUp")}
+          />
+        </View>
       </View>
     </AuthLayout>
   )

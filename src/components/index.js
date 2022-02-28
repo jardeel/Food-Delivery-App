@@ -5,6 +5,7 @@ import HorizontalFoodCard from './HorizontalFoodCard';
 import IconButton from './IconButton';
 import TextButton from './TextButton';
 import TextIconButton from './TextIconButton';
+import TextIconButtonFG from './TextIconButtonFG';
 import TwoPointSlider from './TwoPointSlider';
 import VerticalFoodCard from './VerticalFoodCard';
 
@@ -16,6 +17,7 @@ export {
   IconButton,
   TextButton,
   TextIconButton,
+  TextIconButtonFG,
   TwoPointSlider,
   VerticalFoodCard
 }

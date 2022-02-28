@@ -2,6 +2,7 @@ import MainLayout from "./MainLayout"
 import Onboarding from "./OnBoarding/onBoarding"
 
 //Authentication
+import AuthLayout from "./Authentication/AuthLayout"
 import SignIn from "./Authentication/SignIn"
 import SignUp from "./Authentication/SignUp"
 import Otp from "./Authentication/Otp"
@@ -32,6 +33,7 @@ export {
   CartTab,
   Favourite,
   Notification,
+  AuthLayout,
   SignIn,
   SignUp,
   Otp,

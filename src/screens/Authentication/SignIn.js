@@ -3,14 +3,16 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 
 import { FONTS, SIZES, COLORS, icons } from '../../constants';
 import { AuthLayout } from '../';
-import { FormInput } from '../../components';
+import { FormInput, CustomSwitch, TextButton } from '../../components';
+import { utils } from '../../utils';
 
-const SignIn = () => {
+const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
 
   const [showPass, setShowPass] = useState(false);
+  const [saveMe, setSaveMe] = useState(false);
 
   return(
     <AuthLayout
@@ -29,18 +31,20 @@ const SignIn = () => {
           keyboardType="email-address"
           autoCompleteType="email"
           onChange={(value) => {
-            //validate email
+            utils.validateEmail(value, setEmailError)
             setEmail(value)
           }}
           errorMsg={emailError}
           appendComponent={
             <View style={{ justifyContent: 'center' }}>
               <Image
-                source={icons.correct}
+                source={email == "" || (email != "" && emailError == "")
+                  ? icons.correct : icons.cancel}
                 style={{
                   height: 20,
                   width: 20,
-                  tintColor: COLORS.green
+                  tintColor: email == "" ? COLORS.gray : (email != "" && emailError == "") ?
+                    COLORS.green : COLORS.red
                 }}
               />
             </View>
@@ -77,6 +81,30 @@ const SignIn = () => {
         />
 
         {/* Save me & Forgot Password */}
+        <View
+          style={{
+            flexDirection: 'row',
+            marginTop: SIZES.radius,
+            justifyContent: 'space-between'
+          }}
+        >
+          <CustomSwitch
+            value={saveMe}
+            onChange={(value) => setSaveMe(value)}
+          />
+
+          <TextButton
+            label="Forgot Password?"
+            buttonContainerStyle={{
+              backgroundColor: null
+            }}
+            labelStyle={{
+              color: COLORS.gray,
+              ...FONTS.body4
+            }}
+            onPress={() => navigation.navigate("ForgotPassword")}
+          />
+        </View>
 
         {/* Sign In */}
 

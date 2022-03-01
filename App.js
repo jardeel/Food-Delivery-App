@@ -4,8 +4,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import * as SplashScreen from 'expo-splash-screen';
 import AppLoading from 'expo-app-loading';
+import { useFonts } from 'expo-font';
 import {
-  useFonts,
   Poppins_100Thin,
   Poppins_200ExtraLight,
   Poppins_300Light,
@@ -44,15 +44,23 @@ const App = () => {
     Poppins_900Black,
   });
 
-  useEffect(() => {
-    async function loadFonts(){
-      if(!fontsLoaded){
-        return <AppLoading />
-      }
-      SplashScreen.hideAsync();
+  // useEffect(() => {
+  //   async function loadFonts(){
+  //     if(!fontsLoaded){
+  //       return <AppLoading />
+  //     }
+  //     SplashScreen.hideAsync();
+  //   }
+  //   loadFonts()
+  // },[])
+
+  function loadFonts(){
+    if(!fontsLoaded){
+      return <AppLoading />
     }
-    loadFonts()
-  },[])
+  }
+
+  loadFonts();
 
   return(
     <NavigationContainer>

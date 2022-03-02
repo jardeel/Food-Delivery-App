@@ -6,6 +6,8 @@ import HeaderDetail from './HeaderDetail';
 import HorizontalFoodCard from './HorizontalFoodCard';
 import IconButton from './IconButton';
 import IconLabel from './IconLabel';
+import LineDivider from './LineDivider';
+import Rating from './Rating';
 import TextButton from './TextButton';
 import TextIconButton from './TextIconButton';
 import TextIconButtonFG from './TextIconButtonFG';
@@ -21,6 +23,8 @@ export {
   HorizontalFoodCard,
   IconButton,
   IconLabel,
+  LineDivider,
+  Rating,
   TextButton,
   TextIconButton,
   TextIconButtonFG,

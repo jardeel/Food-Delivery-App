@@ -14,12 +14,15 @@ import {
   HeaderDetail,
   IconButton,
   CartQuantityButton,
-  IconLabel
+  IconLabel,
+  TextButton,
+  LineDivider,
+  Rating
 } from '../../components';
 
 const FoodDetail = ({ navigation }) => {
   const [foodItem, setFoodItem] = useState(dummyData.vegBiryani);
-
+  const [selectedSize, setSelectedSize] = useState("");
 
   function renderHeaderDetail() {
     return (
@@ -123,6 +126,7 @@ const FoodDetail = ({ navigation }) => {
 
         {/* Food Info */}
         <View style={{ marginTop: SIZES.padding }}>
+
           {/* Name & description */}
           <Text style={{...FONTS.h1 }}>
             {foodItem?.name}
@@ -184,7 +188,94 @@ const FoodDetail = ({ navigation }) => {
             />
 
           </View>
+
+          {/* Sizes */}
+          <View
+            style={{
+              flexDirection: 'row',
+              marginTop: SIZES.padding,
+              alignItems: 'center'
+            }}
+          >
+            <Text style={{ ...FONTS.h3 }}>
+              Sizes:
+            </Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                marginLeft: SIZES.padding
+              }}
+            >
+              {dummyData.sizes.map((item, index) => {
+                return (
+                  <TextButton
+                    key={`Sizes-${index}`}
+                    buttonContainerStyle={{
+                      width: 55,
+                      height: 55,
+                      margin: SIZES.base,
+                      borderWidth: 1,
+                      borderRadius: SIZES.radius,
+                      borderColor: selectedSize == item.id ? COLORS.primary : COLORS.gray2,
+                      backgroundColor:  selectedSize == item.id ? COLORS.primary : null
+                    }}
+                    label={item.label}
+                    labelStyle={{
+                      color: selectedSize == item.id ? COLORS.white : COLORS.gray2,
+                      ...FONTS.body2
+                    }}
+                    onPress={() => setSelectedSize(item.id)}
+                  />
+                )
+              })}
+            </View>
+          </View>
+
         </View>
+      </View>
+    )
+  }
+
+  function renderRestaurant() {
+    return (
+      <View
+        style={{
+          flexDirection: 'row',
+          marginVertical: SIZES.padding,
+          paddingHorizontal: SIZES.padding,
+          alignItems: 'center'
+        }}
+      >
+        <Image
+          source={images.profile}
+          style={{
+            width: 50,
+            height: 50,
+            borderRadius: SIZES.radius
+          }}
+        />
+
+        {/* Info */}
+        <View
+          style={{
+            flex: 1,
+            marginLeft: SIZES.radius,
+            justifyContent: 'center'
+          }}
+        >
+          <Text style={{...FONTS.h3 }}>Jardel Sousa</Text>
+          <Text style={{ color: COLORS.gray, ...FONTS.body4}}>1.2 KM away from you</Text>
+        </View>
+
+        {/* Ratings */}
+        <Rating
+          rating={4}
+          iconStyle={{
+            marginLeft: 3
+          }}
+        />
+
       </View>
     )
   }
@@ -199,7 +290,10 @@ const FoodDetail = ({ navigation }) => {
         {/* Food Detail */}
         {renderDetails()}
 
+        <LineDivider />
+
         {/* Restaurant */}
+        {renderRestaurant()}
       </ScrollView>
 
       {/* Footer */}

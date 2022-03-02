@@ -5,6 +5,7 @@ import Header from './Header';
 import HeaderDetail from './HeaderDetail';
 import HorizontalFoodCard from './HorizontalFoodCard';
 import IconButton from './IconButton';
+import IconLabel from './IconLabel';
 import TextButton from './TextButton';
 import TextIconButton from './TextIconButton';
 import TextIconButtonFG from './TextIconButtonFG';
@@ -19,6 +20,7 @@ export {
   FormInput,
   HorizontalFoodCard,
   IconButton,
+  IconLabel,
   TextButton,
   TextIconButton,
   TextIconButtonFG,

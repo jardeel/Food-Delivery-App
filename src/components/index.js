@@ -8,6 +8,7 @@ import IconButton from './IconButton';
 import IconLabel from './IconLabel';
 import LineDivider from './LineDivider';
 import Rating from './Rating';
+import StepperInput from './StepperInput';
 import TextButton from './TextButton';
 import TextIconButton from './TextIconButton';
 import TextIconButtonFG from './TextIconButtonFG';
@@ -25,6 +26,7 @@ export {
   IconLabel,
   LineDivider,
   Rating,
+  StepperInput,
   TextButton,
   TextIconButton,
   TextIconButtonFG,

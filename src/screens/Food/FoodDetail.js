@@ -17,12 +17,14 @@ import {
   IconLabel,
   TextButton,
   LineDivider,
-  Rating
+  Rating,
+  StepperInput
 } from '../../components';
 
 const FoodDetail = ({ navigation }) => {
   const [foodItem, setFoodItem] = useState(dummyData.vegBiryani);
   const [selectedSize, setSelectedSize] = useState("");
+  const [qty, setQty] = useState(1);
 
   function renderHeaderDetail() {
     return (
@@ -280,6 +282,46 @@ const FoodDetail = ({ navigation }) => {
     )
   }
 
+  function renderFooter() {
+    return (
+      <View
+        style={{
+          flexDirection: 'row',
+          height: 120,
+          alignItems: 'center',
+          paddingHorizontal: SIZES.padding,
+          paddingBottom: SIZES.radius
+        }}
+      >
+        {/* Stepper Input */}
+        <StepperInput
+          value={qty}
+          onAdd={() => setQty(qty + 1)}
+          onMinus={() => {
+            if(qty > 1){
+              setQty(qty - 1)
+            }
+          }}
+        />
+
+        {/* Text Button */}
+        <TextButton
+          buttonContainerStyle={{
+            flex: 1,
+            flexDirection: 'row',
+            height: 60,
+            marginLeft: SIZES.radius,
+            paddingHorizontal: SIZES.radius,
+            borderRadius: SIZES.radius,
+            backgroundColor: COLORS.primary
+          }}
+          label="Buy Now"
+          label2="$15.99"
+        />
+      </View>
+    )
+  }
+
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.white }}>
       {/* Header */}
@@ -297,6 +339,9 @@ const FoodDetail = ({ navigation }) => {
       </ScrollView>
 
       {/* Footer */}
+      <LineDivider />
+
+      {renderFooter()}
     </View>
   )
 }

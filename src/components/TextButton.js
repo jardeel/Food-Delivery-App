@@ -7,7 +7,9 @@ const TextButton = ({
   labelStyle,
   buttonContainerStyle,
   disabled,
-  onPress
+  onPress,
+  label2 = "",
+  label2Style
 }) => {
   return (
     <TouchableOpacity
@@ -23,6 +25,20 @@ const TextButton = ({
       <Text style={{ color: COLORS.white, ...FONTS.h3, ...labelStyle}}>
         {label}
       </Text>
+
+      {label2 != "" &&
+        <Text
+          style={{
+            flex: 1,
+            textAlign: 'right',
+            color: COLORS.white,
+            ...FONTS.h3,
+            ...label2Style
+          }}
+        >
+          {label2}
+        </Text>
+      }
     </TouchableOpacity>
   )
 }

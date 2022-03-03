@@ -1,5 +1,6 @@
 import CartQuantityButton from './CartQuantityButton';
 import CustomSwitch from './CustomSwitch';
+import FooterTotal from './FooterTotal';
 import FormInput from './FormInput';
 import Header from './Header';
 import HeaderDetail from './HeaderDetail';
@@ -18,6 +19,7 @@ import VerticalFoodCard from './VerticalFoodCard';
 export {
   CartQuantityButton,
   CustomSwitch,
+  FooterTotal,
   Header,
   HeaderDetail,
   FormInput,

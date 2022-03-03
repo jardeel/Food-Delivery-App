@@ -6,7 +6,8 @@ import {
   Header,
   IconButton,
   CartQuantityButton,
-  StepperInput
+  StepperInput,
+  FooterTotal
 } from '../../components';
 import { FONTS, SIZES, COLORS, icons, dummyData } from '../../constants';
 
@@ -168,6 +169,11 @@ const MyCart = ({ navigation }) => {
       {renderCartList()}
 
       {/* Footer */}
+      <FooterTotal
+        subTotal={37.97}
+        shippingFree={0.00}
+        total={37.97}
+      />
     </View>
   )
 }

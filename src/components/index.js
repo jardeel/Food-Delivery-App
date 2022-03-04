@@ -1,3 +1,4 @@
+import CardItem from './CardItem';
 import CartQuantityButton from './CartQuantityButton';
 import CustomSwitch from './CustomSwitch';
 import FooterTotal from './FooterTotal';
@@ -17,6 +18,7 @@ import TwoPointSlider from './TwoPointSlider';
 import VerticalFoodCard from './VerticalFoodCard';
 
 export {
+  CardItem,
   CartQuantityButton,
   CustomSwitch,
   FooterTotal,

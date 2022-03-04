@@ -173,6 +173,7 @@ const MyCart = ({ navigation }) => {
         subTotal={37.97}
         shippingFree={0.00}
         total={37.97}
+        onPress={() => navigation.navigate("MyCard")}
       />
     </View>
   )

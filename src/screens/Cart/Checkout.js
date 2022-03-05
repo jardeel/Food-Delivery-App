@@ -56,11 +56,45 @@ const Checkout = ({ navigation, route }) => {
     )
   }
 
+  function renderMyCards() {
+    return (
+      <View>
+        {selectedCard && dummyData.myCards.map((item, index) => {
+          return (
+            <CardItem
+              key={`MyCard-${item.id}`}
+              item={item}
+              isSelected={`${selectedCard?.key}-${selectedCard?.id}` == `MyCard-${item.id}`}
+              onPress={() => setSelectedCard({ ...item, key: "MyCard"})}
+            />
+          )
+        })}
+      </View>
+    )
+  }
+
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.white }}>
       {/* Header */}
       {renderHeader()}
 
+      {/* Body */}
+      <KeyboardAwareScrollView
+        keyboardDismissMode='on-drag'
+        extraScrollHeight={-200}
+        contentContainerStyle={{
+          flexGrow: 1,
+          paddingHorizontal: SIZES.padding,
+          paddingBottom: 20
+        }}
+      >
+        {/* My Cards */}
+        {renderMyCards()}
+
+        {/* Delivery Address */}
+
+        {/* Coupon */}
+      </KeyboardAwareScrollView>
     </View>
   )
 }

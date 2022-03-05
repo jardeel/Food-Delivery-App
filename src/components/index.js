@@ -3,6 +3,7 @@ import CartQuantityButton from './CartQuantityButton';
 import CustomSwitch from './CustomSwitch';
 import FooterTotal from './FooterTotal';
 import FormInput from './FormInput';
+import FormInputCheck from './FormInputCheck';
 import Header from './Header';
 import HeaderDetail from './HeaderDetail';
 import HorizontalFoodCard from './HorizontalFoodCard';
@@ -25,6 +26,7 @@ export {
   Header,
   HeaderDetail,
   FormInput,
+  FormInputCheck,
   HorizontalFoodCard,
   IconButton,
   IconLabel,

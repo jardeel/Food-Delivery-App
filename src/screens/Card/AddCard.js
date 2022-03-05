@@ -2,12 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, ImageBackground } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import { Header, IconButton, TextButton } from '../../components';
+import { Header, IconButton, TextButton, FormInput, FormInputCheck } from '../../components';
 import { FONTS, SIZES, COLORS, icons, images } from '../../constants';
 import { utils } from '../../utils';
 
 const AddCard = ({ navigation, route }) => {
   const [selectedCard, setSelectedCard] = useState(null);
+  const [cardNumber, setCardNumber] = useState("");
+  const [cardNumberError, setCardNumberError] = useState("");
+  const [cardName, setCardName] = useState("");
+  const [cardNameError, setCardNameError] = useState("");
+  const [expiryDate, setExpiryDate] = useState("");
+  const [expiryDateError, setExpiryDateError] = useState("");
+  const [cvv, setCvv] = useState("");
+  const [cvvError, setCvvError] = useState("");
+  const [isRemember, setIsRemember] = useState(false);
 
   useEffect(() => {
     let {selectedCard} = route.params
@@ -87,19 +96,43 @@ const AddCard = ({ navigation, route }) => {
           }}
         >
           <Text style={{ color: COLORS.white, ...FONTS.h3 }}>
-            Jardas Sousa
+            {cardName}
           </Text>
 
           <View style={{ flexDirection: 'row' }}>
             <Text style={{ flex: 1, color: COLORS.white }}>
-              1234 1234 1234 1234
+              {cardNumber}
             </Text>
             <Text style={{ color: COLORS.white, ...FONTS.body3 }}>
-              21/25
+              {expiryDate}
             </Text>
           </View>
         </View>
       </ImageBackground>
+    )
+  }
+
+  function renderForm() {
+    return (
+      <View style={{ marginTop: SIZES.padding * 2}}>
+        <FormInput
+          label="Card Number"
+          keyboardType="number-pad"
+          maxLength={19}
+          value={cardNumber}
+          onChange={(value) => {
+            setCardNumber(value.replace(/\s/g, '').replace(/(\d{4})/g, '$1 ').trim())
+            utils.validateInput(value, 19, setCardNumberError)
+          }}
+          errorMsg={cardNumberError}
+          appendComponent={
+            <FormInputCheck
+              value={cardNumber}
+              error={cardNumberError}
+            />
+          }
+        />
+      </View>
     )
   }
 
@@ -120,6 +153,7 @@ const AddCard = ({ navigation, route }) => {
         {renderCard()}
 
         {/* Forms */}
+        {renderForm()}
       </KeyboardAwareScrollView>
 
       {/* Footer */}

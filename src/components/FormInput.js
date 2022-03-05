@@ -17,7 +17,9 @@ const FormInput = ({
   keyboardType="default",
   autoCompleteType="off",
   autoCapitalize="none",
-  errorMsg=""
+  value = "",
+  errorMsg="",
+  maxLength
 }) => {
   return (
     <View style={{ ...containerStyle }}>
@@ -44,13 +46,15 @@ const FormInput = ({
           paddingHorizontal: SIZES.padding,
           marginTop: SIZES.base,
           borderRadius: SIZES.radius,
-          backgroundColor: COLORS.lightGray2
+          backgroundColor: COLORS.lightGray2,
+          ...inputStyle
         }}
       >
         {prependComponent}
 
         <TextInput
           style={{ flex: 1, ...inputStyle }}
+          value={value}
           placeholder={placeholder}
           placeholderTextColor={COLORS.gray}
           secureTextEntry={secureTextEntry}
@@ -58,6 +62,7 @@ const FormInput = ({
           autoCompleteType={autoCompleteType}
           autoCapitalize={autoCapitalize}
           onChangeText={(text) => onChange(text)}
+          maxLength={maxLength}
         />
 
         {appendComponent}

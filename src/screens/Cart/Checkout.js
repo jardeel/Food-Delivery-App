@@ -172,6 +172,12 @@ const Checkout = ({ navigation, route }) => {
         {/* Coupon */}
         {renderCoupon()}
       </KeyboardAwareScrollView>
+      <FooterTotal
+        subTotal={37.97}
+        shippingFree={0.00}
+        total={37.97}
+        onPress={() => navigation.replace("Success")}
+      />
     </View>
   )
 }

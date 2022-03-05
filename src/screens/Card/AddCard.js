@@ -2,7 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, ImageBackground } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import { Header, IconButton, TextButton, FormInput, FormInputCheck } from '../../components';
+import {
+  Header,
+  IconButton,
+  TextButton,
+  FormInput,
+  FormInputCheck,
+  RadioButton
+} from '../../components';
+
 import { FONTS, SIZES, COLORS, icons, images } from '../../constants';
 import { utils } from '../../utils';
 
@@ -23,6 +31,12 @@ const AddCard = ({ navigation, route }) => {
 
     setSelectedCard(selectedCard)
   }, [])
+
+  function isEnabledAddCard() {
+    return cardNumber != "" && cardName != "" && expiryDate != ""
+      && cvv != "" && cardNumberError == "" && cardNameError == ""
+      && expiryDateError == "" && cvvError == ""
+  }
 
   function renderHeader(){
     return (
@@ -196,6 +210,43 @@ const AddCard = ({ navigation, route }) => {
           />
         </View>
 
+        {/* Remember */}
+        <View
+          style={{
+            alignItems: 'flex-start',
+            marginTop: SIZES.padding
+          }}
+        >
+          <RadioButton
+            label="Remember this card details."
+            isSelected={isRemember}
+            onPress={() => setIsRemember(!isRemember)}
+          />
+        </View>
+      </View>
+    )
+  }
+
+  function renderFooter() {
+    return (
+      <View
+        style={{
+          paddingTop: SIZES.radius,
+          paddingBottom: SIZES.padding,
+          paddingHorizontal: SIZES.padding
+        }}
+      >
+        <TextButton
+          label="Add Card"
+          disabled={!isEnabledAddCard()}
+          buttonContainerStyle={{
+            height: 60,
+            borderRadius: SIZES.radius,
+            backgroundColor: isEnabledAddCard() ?
+              COLORS.primary : COLORS.transparentPrimary
+          }}
+          onPress={() => navigation.goBack()}
+        />
       </View>
     )
   }
@@ -221,6 +272,7 @@ const AddCard = ({ navigation, route }) => {
       </KeyboardAwareScrollView>
 
       {/* Footer */}
+      {renderFooter()}
     </View>
   )
 }

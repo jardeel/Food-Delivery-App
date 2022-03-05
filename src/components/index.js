@@ -10,6 +10,7 @@ import HorizontalFoodCard from './HorizontalFoodCard';
 import IconButton from './IconButton';
 import IconLabel from './IconLabel';
 import LineDivider from './LineDivider';
+import RadioButton from './RadioButton';
 import Rating from './Rating';
 import StepperInput from './StepperInput';
 import TextButton from './TextButton';
@@ -31,6 +32,7 @@ export {
   IconButton,
   IconLabel,
   LineDivider,
+  RadioButton,
   Rating,
   StepperInput,
   TextButton,

@@ -115,6 +115,8 @@ const AddCard = ({ navigation, route }) => {
   function renderForm() {
     return (
       <View style={{ marginTop: SIZES.padding * 2}}>
+
+        {/* Cardholder Number */}
         <FormInput
           label="Card Number"
           keyboardType="number-pad"
@@ -132,6 +134,68 @@ const AddCard = ({ navigation, route }) => {
             />
           }
         />
+
+        {/* Cardholder Name */}
+        <FormInput
+          label="Cardholder Name"
+          value={cardName}
+          containerStyle={{ marginTop: SIZES.radius }}
+          onChange={(value) => {
+            utils.validateInput(value, 1, setCardNameError)
+            setCardName(value)
+          }}
+          errorMsg={cardNameError}
+          appendComponent={
+            <FormInputCheck
+              value={cardName}
+              error={cardNameError}
+            />
+          }
+        />
+
+        {/* Expiry Date / CVV */}
+        <View
+          style={{
+            flexDirection: 'row',
+            marginTop: SIZES.radius
+          }}
+        >
+          <FormInput
+            label="Expiry Date"
+            value={expiryDate}
+            placeholder="MM/YY"
+            maxLength={5}
+            containerStyle={{ flex: 1 }}
+            onChange={(value) => {
+              utils.validateInput(value, 5, setExpiryDateError)
+              setExpiryDate(value)
+            }}
+            appendComponent={
+              <FormInputCheck
+                value={expiryDate}
+                error={expiryDateError}
+              />
+            }
+          />
+
+          <FormInput
+            label="CVV"
+            value={cvv}
+            maxLength={3}
+            containerStyle={{ flex: 1, marginLeft: SIZES.radius }}
+            onChange={(value) => {
+              utils.validateInput(value, 3, setCvvError)
+              setCvv(value)
+            }}
+            appendComponent={
+              <FormInputCheck
+                value={cvv}
+                error={cvvError}
+              />
+            }
+          />
+        </View>
+
       </View>
     )
   }

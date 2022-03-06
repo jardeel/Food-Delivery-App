@@ -37,6 +37,39 @@ const DeliveryStatus = ({ navigation }) => {
     )
   }
 
+  function renderTrackOrder() {
+    return (
+      <View
+        style={{
+          marginTop: SIZES.padding,
+          paddingVertical: SIZES.padding,
+          borderRadius: SIZES.radius,
+          borderWidth: 2,
+          borderColor: COLORS.lightGray2,
+          backgroundColor: COLORS.white2
+        }}
+      >
+        {/* Tack Order */}
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: 20,
+            paddingHorizontal: SIZES.padding,
+          }}
+        >
+          <Text style={{ ...FONTS.h3 }}>
+            Tack Order
+          </Text>
+          <Text style={{ color: COLORS.gray, ...FONTS.body3 }}>
+            NY012345
+          </Text>
+        </View>
+      </View>
+    )
+  }
+
   return (
     <View
       style={{
@@ -52,6 +85,9 @@ const DeliveryStatus = ({ navigation }) => {
       {renderInfo()}
 
       {/* Track Order */}
+      <ScrollView showsHorizontalScrollIndicator={false}>
+        {renderTrackOrder()}
+      </ScrollView>
 
       {/* Footer */}
     </View>

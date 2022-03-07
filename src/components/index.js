@@ -16,6 +16,7 @@ import StepperInput from './StepperInput';
 import TextButton from './TextButton';
 import TextIconButton from './TextIconButton';
 import TextIconButtonFG from './TextIconButtonFG';
+import TextIconButtonMap from './TextIconButtonMap';
 import TwoPointSlider from './TwoPointSlider';
 import VerticalFoodCard from './VerticalFoodCard';
 
@@ -38,6 +39,7 @@ export {
   TextButton,
   TextIconButton,
   TextIconButtonFG,
+  TextIconButtonMap,
   TwoPointSlider,
   VerticalFoodCard
 }

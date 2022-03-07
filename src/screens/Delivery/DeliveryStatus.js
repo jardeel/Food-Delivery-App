@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Image, ScrollView } from 'react-native';
 
-import { Header, LineDivider, TextButton } from '../../components';
+import { Header, LineDivider, TextButton, TextIconButtonMap } from '../../components';
 import { FONTS, SIZES, COLORS, icons, constants } from '../../constants';
 
 const DeliveryStatus = ({ navigation }) => {
@@ -139,6 +139,75 @@ const DeliveryStatus = ({ navigation }) => {
     )
   }
 
+  function renderFooter() {
+    return (
+      <View
+        style={{
+          marginTop: SIZES.radius,
+          marginBottom: SIZES.padding
+        }}
+      >
+        {currentStep < constants.track_order_status.length - 1 &&
+          <View
+            style={{
+              flexDirection: 'row',
+              height: 55
+            }}
+          >
+            {/* Cancel  */}
+            <TextButton
+              buttonContainerStyle={{
+                width: "40%",
+                borderRadius: SIZES.base,
+                backgroundColor: COLORS.lightGray2
+              }}
+              label="Cancel"
+              labelStyle={{
+                color: COLORS.primary
+              }}
+              onPress={() => navigation.navigate("FoodDetail")}
+            />
+
+            {/* MapView */}
+            <TextIconButtonMap
+              containerStyle={{
+                flex: 1,
+                marginLeft: SIZES.radius,
+                borderRadius: SIZES.base,
+                backgroundColor: COLORS.primary
+              }}
+              label="Map View"
+              labelStyle={{
+                color: COLORS.white,
+                ...FONTS.h3
+              }}
+              icon={icons.map}
+              iconPosition="LEFT"
+              iconStyle={{
+                width: 25,
+                height: 25,
+                marginRight: SIZES.base,
+                tintColor: COLORS.white
+              }}
+              onPress={() => navigation.navigate("Map")}
+            />
+          </View>
+        }
+
+        {currentStep == constants.track_order_status.length - 1 &&
+          <TextButton
+            buttonContainerStyle={{
+              height: 55,
+              borderRadius: SIZES.base
+            }}
+            label="DONE"
+            onPress={() => navigation.navigate("FoodDetail")}
+          />
+        }
+      </View>
+    )
+  }
+
   return (
     <View
       style={{
@@ -159,6 +228,7 @@ const DeliveryStatus = ({ navigation }) => {
       </ScrollView>
 
       {/* Footer */}
+      {renderFooter()}
     </View>
   )
 }
